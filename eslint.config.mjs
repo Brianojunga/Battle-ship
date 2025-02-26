@@ -10,6 +10,10 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        test: "readonly",
+        expect: "readonly", 
+        describe: "readonly", 
+        beforeEach: "readonly",
       },
     },
   },
