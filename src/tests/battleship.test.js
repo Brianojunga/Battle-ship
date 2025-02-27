@@ -1,4 +1,4 @@
-import { Ship } from "./battleship.js"
+import { Ship } from "../battleship.js"
 
 test('Ship length and hits', ()=>{
     const battleShip = new Ship(4)
