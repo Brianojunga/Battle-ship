@@ -1,4 +1,3 @@
-import { Ship } from "./battleship.js"
 
 export class Gameboard{
     constructor (){
@@ -6,11 +5,11 @@ export class Gameboard{
         this.missedAttacks = new Set ()
     }
 
-    placeShip(coord, length){
-        const battleShip = new Ship(length)
-        for(let [x,y] of coord){
-            let key = `${x},${y}`
-            this.board.set(key, battleShip)
+    placeShip(x,y , ship, orientation = 'horizontal'){
+        for(let i = 0 ; i < ship.length; i++){
+            let newX = orientation === 'horizontal' ? x + i : x
+            let newY = orientation === 'horizontal' ? y : y + i
+            this.board.set(`${newX},${newY}`, ship)
         }
     }
 
