@@ -8,10 +8,6 @@ export class Gameboard{
 
     placeShip(x,y, length, orientation = 'horizontal'){
         const ship = new Ship(length)
-        if(this.board.has(`${x},${y}`)){
-            alert('The coordinate has a Ship')
-            return 
-        }
         for(let i = 0 ; i < ship.length; i++){
             let newX = orientation === 'horizontal' ? x + i : x
             let newY = orientation === 'horizontal' ? y : y + i
@@ -23,11 +19,12 @@ export class Gameboard{
         let key = `${x},${y}`
         if(this.board.has(key)){
             this.board.get(key).hit()
+            const shipSunk = this.board.get(key).isSunk()
             this.successfulAttacks.add(key)
-            return true
+            return [true, shipSunk]
         }else{
             this.missedAttacks.add(key)
-            return false
+            return [false, false]
         }
     }
 
