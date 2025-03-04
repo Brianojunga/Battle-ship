@@ -7,11 +7,40 @@
   </head>
   <body class="boards">
     <h1>Battleship</h1>
+    
     <section class="game-section">
+      <h4 class="game-win"></h4>
+      <button class="restart">Restart</button>
       <div class="game-board">
-        <div class="computer-board board"></div>
+        <div class="about board">
+          <div>
+            <h3 class="about-game">About Game</h3>
+            <p>Battleship is a strategy board game where players take turns trying to sink each other's ships. It's also known as Battleships or Sea Battle. </p>
+            <h3 class="how-to-play">How to play</h3>
+            <ul>
+              <li>Players place their fleet of five ships on a grid-like board. </li>
+              <li>Players take turns calling out shots at the other player's ships. </li>
+              <li>Players mark hits with red pegs. </li>
+              <li>Players continue to take turns until they've sunk all of their opponent's ships. </li>
+            </ul>
+          </div>
+          <div class="form-btns">
+            <form action="">
+              <label for="player-name">Player name: </label>
+              <input type="text" name="player-name" id="player-name">
+              <button type="submit">submit</button>
+            </form>
+            <div class="btn">
+              <button class="random">Random player Ship</button>
+              <button class="start">Start Game</button>
+            </div>
+            
+          </div>
+        </div>
         <div class="player-board board"></div>
+        <div class="computer-board board"></div>
       </div>
+      <h3 class="update-hit-miss"></h3>
     </section>
   </body>
 </html>
