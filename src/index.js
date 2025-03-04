@@ -5,18 +5,23 @@ const playerBoard = document.querySelector('.player-board');
 const computerBoard = document.querySelector('.computer-board');
 const updateHitMiss = document.querySelector('.update-hit-miss')
 const gameWin = document.querySelector('.game-win');
+const randomPlayerShip = document.querySelector('.random')
+const start = document.querySelector('.start')
+const bodyEl= document.querySelector('body')
+const form = document.querySelector('form')
+const restart = document.querySelector('.restart')
 
-
+let playerName;
 let gameOver = false;
 const boardSize = 10;
-let player1 = new Player ('Ojay');
+let player1 = new Player ();
 let computerPlayer = new Player ('computer');
 let currentPlayer = 'player'
 
+gameWin.textContent = `${player1.type}'s turn`
 function setUpShips(player) {
-    if (player.type === 'computer') {
 
-        for (let shipLength = 2; shipLength < 6; shipLength++) {
+        for (let shipLength = 1; shipLength < 6; shipLength++) {
             let shipNotPlaced = true;
 
             while (shipNotPlaced) {  
@@ -45,12 +50,7 @@ function setUpShips(player) {
         }
         return
     }
-    const shipCoords = ["1,1", "4,2", "0,9", "5,5"];
-    for (let i = 0; i < shipCoords.length; i++) {
-        let [x, y] = shipCoords[i].split(',').map(Number);
-        player.gameboard.placeShip(x, y, i + 2);
-    }
-}
+
 
 
 function createPlayerBoards(player, playerDiv){
@@ -64,6 +64,10 @@ function createPlayerBoards(player, playerDiv){
             playerDiv.appendChild(playerCell)
         }
     }
+    const para = document.createElement('para')
+    para.classList.add('player-board-details');
+    para.textContent = `${player.type} game board`
+    playerDiv.append(para)
 }
 
 function getShipName(length){
@@ -75,7 +79,9 @@ function getShipName(length){
         case 3 : 
          return 'Cruiser'
         case 2 : 
-         return 'Destroyer' 
+         return 'Destroyer'
+        case 1 : 
+         return 'Patrol ship'  
     }
 }
 
@@ -88,6 +94,7 @@ function checkWin(shipSunk, key, player, opponent){
     if(shipSunk && (opponent.gameboard.allShipsSunk()) ){
             gameWin.textContent = `${player.type} wins the game`
             gameOver = true
+            restart.style.display = 'flex'
 }}
 
 
@@ -156,4 +163,32 @@ computerBoard.addEventListener('click', e =>{
     
 })
 
+randomPlayerShip.addEventListener('click', () =>{
+    player1.gameboard.board.clear()
+    playerBoard.replaceChildren()
+    setUpShips(player1)
+    createPlayerBoards(player1, playerBoard)
+})
+
+start.addEventListener('click', () =>{
+    bodyEl.classList.toggle('playGame')
+    
+})
+
+form.addEventListener('submit', e => {
+    e.preventDefault()
+     playerName = `${document.querySelector('input').value}`
+
+     player1.gameboard.board.clear()
+     playerBoard.replaceChildren()
+
+     player1 = new Player (playerName ? playerName : 'player');
+     setUpShips(player1);
+     createPlayerBoards(player1, playerBoard)
+     
+})
+
+restart.addEventListener('click', () =>{
+    location.reload()
+})
 
